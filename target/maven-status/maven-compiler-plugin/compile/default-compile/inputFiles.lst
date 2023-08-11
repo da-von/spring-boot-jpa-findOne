@@ -1,0 +1,7 @@
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/repository/AuthorRepository.java
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/repository/model/Author.java
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/repository/model/Book.java
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/repository/model/BaseEntity.java
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/JpaDemoApplication.java
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/repository/BookRepository.java
+/Users/danielvontobel/_dev-migrations/jpa-demo/src/main/java/ch/subsidia/jpademo/repository/model/EntityGraphs.java

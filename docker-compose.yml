@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  test-db:
+    image: postgres:13-alpine
+    container_name: jpa-demo-test-db
+    environment:
+      POSTGRES_DB: jpa-demo-test-db
+      POSTGRES_USER: jpa-demo-user
+      POSTGRES_PASSWORD: jpa-demo-pwd
+      CONFIGS: "listen_addresses:'*'"
+    ports:
+      - 9932:5432

@@ -1,0 +1,35 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    username: jpa-demo-user
+    password: jpa-demo-pwd
+    driver-class-name: "org.postgresql.Driver"
+    url: "jdbc:postgresql://localhost:9932/jpa-demo-test-db"
+    hikari:
+      connection-timeout: 1000
+  jpa:
+    properties:
+      jakarta.persistence.sharedCache.mode: NONE  # spring-boot:3: a hibernate issue with deprecated implementation
+      query:
+        fail_on_pagination_over_collection_fetch: true
+      hibernate:
+        id.db_structure_naming_strategy: legacy # spring-boot:3: see https://stackoverflow.com/questions/74929193/revinfo-table-is-missing-the-sequence-revinfo-seq
+        dialect: "org.hibernate.dialect.PostgreSQLDialect"
+        temp:
+          use_jdbc_metadata_defaults: true # TODO remove comment: disable Feature until it's unsupported in PostgreSQL
+        current_session_context_class: "org.springframework.orm.hibernate5.SpringSessionContext"
+    open-in-view: false
+  flyway:
+    locations:
+      - classpath:db/migration
+
+
+logging:
+  level:
+    root: warn
+    org:
+      hibernate:
+        SQL: debug
+    ch:
+      subsidia: info
