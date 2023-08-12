@@ -14,7 +14,21 @@ public class DatabaseTruncator {
 
     public void truncate() {
 
-        jdbc.execute("TRUNCATE TABLE author CASCADE ;");
+//        jdbc.execute("TRUNCATE TABLE author CASCADE ;");
+
+        jdbc.execute("DO\n"
+                + "$func$\n"
+                + "BEGIN\n"
+                + "   EXECUTE "
+                + "   (SELECT 'TRUNCATE TABLE ' || string_agg(c.oid::regclass::text, ', ') || ' CASCADE'\n"
+                + "    FROM   pg_class c\n"
+                + "    WHERE  c.relkind = 'r'\n"
+                + "    AND    c.relnamespace = 'public'::regnamespace\n"
+                + "    AND    c.relname <> 'flyway_schema_history'\n"
+                + "   );\n"
+                + "END\n"
+                + "$func$;");
+
 
         jdbc.queryForList("SELECT SEQUENCE_NAME FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_SCHEMA='PUBLIC'")
                 .stream()
