@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ch.subsidia</groupId>
-	<artifactId>jpa-demo</artifactId>
+	<artifactId>jpa-demo-findone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jpa-demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>jpa-demo-findone</name>
+	<description>Demo project for Spring Boot - JPA findOne and findById</description>
 
 	<properties>
 		<java.version>17</java.version>

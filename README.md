@@ -20,7 +20,7 @@ For Author accesses, `AuthorRepository.findOne(long id)` and `AuthorRepository.f
 * [ ] Docker Engine is required
 * [ ] Run `docker-compose up`
 * [ ] Run test with maven `./mvnw test`
-* [ ] Run test class `ch.subsidia.jpademo.JpaDemoApplicationTests` with 
+* [ ] Run test class `ch.subsidia.jpademo.JpaDemoApplicationTests` within your development environment
 
 
 ## The demo test
@@ -29,7 +29,7 @@ For Author accesses, `AuthorRepository.findOne(long id)` and `AuthorRepository.f
 One Author with three Books
 
 ### Successful: `findOne(Specification<T> spec)`
-Test for `AuthorRepository.findOne(long id)` is successful. Author is read and access to `author.getBooks()` returns `LazyInitializationException` because no EntityGraph is forhanden.
+Test for `AuthorRepository.findOne(long id)` is successful. Author is read and access to `author.getBooks()` returns `LazyInitializationException` because no EntityGraph is present..
 
 ### Fail: `findOne(Specification<T> spec, EntityGraph entityGraph)`
 
