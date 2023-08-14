@@ -14,11 +14,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static ch.subsidia.jpademo.repository.model.EntityGraphs.AUTHOR_BOOKS;
+import static ch.subsidia.jpademo.repository.model.EntityGraphs.BOOK_AUTHOR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -53,7 +55,7 @@ class JpaDemoApplicationTests {
     }
 
     @Test
-    void findById__withEntityGraph_expectCompleteResolved() {
+    void findById_withEntityGraph_expectCompleteResolved() {
         val authorId = storeSomeData();
         val optionalAuthor = authorRepository.findByAuthorId(authorId, NamedEntityGraph.loading(AUTHOR_BOOKS));
 
@@ -73,7 +75,7 @@ class JpaDemoApplicationTests {
     }
 
     @Test
-    void findOne__withEntityGraph_expectCompleteResolved() {
+    void findOne_withEntityGraph_expectCompleteResolved() {
         val authorId = storeSomeData();
 
         val expectedBooksCount = 3;
@@ -90,6 +92,27 @@ class JpaDemoApplicationTests {
         assertFalse(optionalAuthor.isEmpty());
         assertFalse(optionalAuthor.get().getBooks().isEmpty());
         assertEquals(expectedBooksCount, optionalAuthor.get().getBooks().size());
+
+    }
+
+    @Test
+    void findOne_bookWithAuthorId_expectException() {
+        val authorId = storeSomeData();
+
+        assertThrowsExactly(org.springframework.dao.IncorrectResultSizeDataAccessException.class,
+                () -> bookRepository.findOneFor(authorId));
+
+    }
+
+    @Test
+    void findAll_booksWithAuthorId_expectException() {
+        val authorId = storeSomeData();
+
+        val expectedBooksCount = 3;
+        val books = bookRepository.findAllFor(authorId, NamedEntityGraph.loading(BOOK_AUTHOR));
+
+        assertEquals(expectedBooksCount, books.size());
+        books.forEach(b -> assertEquals("Uncle Bob", b.getAuthor().getName()));
 
     }
 

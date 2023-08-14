@@ -3,13 +3,12 @@ package ch.subsidia.jpademo.repository;
 import ch.subsidia.jpademo.repository.model.Author;
 import ch.subsidia.jpademo.repository.model.Author_;
 import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphJpaRepository;
 import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphJpaSpecificationExecutor;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Optional;
 
-public interface AuthorRepository extends EntityGraphJpaRepository<Author, Long>,
+public interface AuthorRepository extends OverrideEntityGraphSimpleJpaRepository<Author, Long>,
         EntityGraphJpaSpecificationExecutor<Author> {
 
     default Optional<Author> findOne(long id) {
